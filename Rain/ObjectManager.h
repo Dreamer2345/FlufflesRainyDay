@@ -14,8 +14,8 @@ class ObjectManager{
   public:
     void Update();
     void Draw();
-    bool AddObject(Object);
-    void RemoveObject(IntType);
+    bool AddObject(Object i);
+    bool RemoveObject(IntType i);
     void Reset();
    private:
     Object Objects[MAXOBJECTS];
@@ -25,7 +25,7 @@ void ObjectManager::Update(){
   for(IntType i = 0; i < MAXOBJECTS; i++){
     if(Objects[i].Active)
     {
-      RunFunction(Objects[i],&Object);
+      RunFunction(i,&Objects[i]);
     }
   }
 }
@@ -34,7 +34,7 @@ void ObjectManager::Draw(){
   for(IntType i = 0; i < MAXOBJECTS; i++){
     if(Objects[i].Active)
     {
-      DrawFunction(Objects[i],&Object);
+      DrawFunction(i,&Objects[i]);
     }
   }
 }
