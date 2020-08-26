@@ -1,5 +1,6 @@
 #include <Arduboy2.h>
 Arduboy2 ard;
+Sprites sprite;
 #include "Rain.h"
 #include "Enums.h"
 #include "Bitmaps.h"
