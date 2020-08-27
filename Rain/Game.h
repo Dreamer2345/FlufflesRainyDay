@@ -4,7 +4,7 @@
 #define EEPROM_SCORE_START   EEPROM_START + 2
 
 unsigned long Score = 0;
-unsigned long High;
+unsigned long High = 0;
 uint8_t Speed = 1;
 
 #include "Rain.h"
@@ -23,7 +23,7 @@ void InitHighScore(){
   }
   else
   {
-    EEPROM.get(EEPROM_SCORE_START,High);
+    EEPROM.get(EEPROM_SCORE_START, High);
   }
   
   gamestate = GameState::MainMenu;
@@ -104,7 +104,7 @@ void GameOver(){
 
 void RunLoop(){
   switch(gamestate){
-    case GameState::InitHighScore: break;
+    case GameState::InitHighScore: InitHighScore(); break;
     case GameState::MainMenu: MainMenu(); break;
     case GameState::GameInit: GameInit(); break;
     case GameState::GamePlay: GamePlay(); break;
