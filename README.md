@@ -1,10 +1,12 @@
 # FlufflesRainyDay
 
-Can you help fluffles get through the rain?
+Can you help fluffles get through the rain? This pup doesent like getting their paws wet unfortunately they've gotten themselves stuck out in a storm. Try and avoid as many puddles as you can so that Fluffles doesent get wet!
 
-## Goal!
+Written for Arduboy GameJam 5
 
-Try and avoid as many puddles as you can so that Fluffles doesent get wet!
+Graphics and Code:
+Dreamer2345 and Help for the function arrays from @Pharap
+
 
 ## EEPROM USAGE
 Index | Usage
