@@ -1,7 +1,7 @@
 #include <Arduboy2.h>
+#include <EEPROM.h>
 Arduboy2 ard;
 Sprites sprite;
-#include "Rain.h"
 #include "Enums.h"
 #include "Bitmaps.h"
 #include "Game.h"
@@ -9,7 +9,6 @@ Sprites sprite;
 
 void setup() {
   ard.begin();
-  amb.Init();
 }
 
 void loop() {

@@ -1,6 +1,6 @@
 #pragma once
 #include <Arduboy2.h>
-#define MaxParticles 5
+#define MaxParticles 10
 #define LightningChance 50
 #define LightningCooldown 200
 
@@ -8,6 +8,9 @@
 struct Particle{
   uint8_t x;
   uint8_t y;
+  uint8_t life;
+  uint8_t maxLife;
+  bool HitGround;
   bool Active;
 };
 
@@ -32,7 +35,9 @@ void Ambiance::Init(){
   {
       particles[i].Active = true;      
       particles[i].y = random(0,64);
-      particles[i].x = random(0,127);
+      particles[i].x = random(0,130);
+      particles[i].life = 0;
+      particles[i].maxLife = random(3,10);
   }
 }
 
@@ -49,7 +54,7 @@ void Ambiance::Update(){
       Accum -= LightningChance;
       CooldownFrames = random(60,LightningCooldown);
       Lightning = true;
-      ard.invert(true);
+      //ard.invert(true);
     }
   }
   else{
@@ -57,7 +62,7 @@ void Ambiance::Update(){
     if(Lightning)
     {
       Lightning = false;
-      ard.invert(false);
+      //ard.invert(false);
     }
   }
 
@@ -66,29 +71,34 @@ void Ambiance::Update(){
   {
     if(particles[i].Active)
       {
-        if(particles[i].y > 64)
-          particles[i].Active = false;
-        
-        particles[i].y += 3;
-        if(Wind)
-          particles[i].x += random(0,2);
-        else
-          particles[i].x -= random(0,2);
+        if(!particles[i].HitGround){
+          particles[i].life++;
+          if((particles[i].y > 64)||(particles[i].life > particles[i].maxLife))
+            particles[i].HitGround = true;
+          
+          particles[i].y += 3;
+          if(Wind)
+            particles[i].x += random(0,2);
+          else
+            particles[i].x -= random(0,2);
+        }
+        else{
+          particles[i].x-=Speed;
+          if(particles[i].x == 0)
+            particles[i].Active = false;
+        }
       }
-  }
-
-  for(uint8_t i = 0; i < MaxParticles; i++)
-  {
-    if(!particles[i].Active)
+    else
       {
         particles[i].Active = true;
         
-        particles[i].y = 0;
+        particles[i].y = random(0,32);
         particles[i].x = random(0,127);
+        particles[i].life = 0;
+        particles[i].maxLife = random(3,10);
+        particles[i].HitGround = false;
       }
-  }
-
-  
+  } 
 }
 
 void Ambiance::Draw(){

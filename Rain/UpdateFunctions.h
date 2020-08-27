@@ -1,18 +1,19 @@
 #pragma once
 
 
+
 void UpdateFluffles(Object* obj, ObjectManager* handler)
 {
   if(ard.justPressed(UP_BUTTON))
   {
-    if(obj->Y > 0)
-      obj->Y-=18;    
+    if(obj->Y > 10)
+      obj->Y-=9;    
   }
 
   if(ard.justPressed(DOWN_BUTTON))
   {
-    if(obj->Y < 36)
-      obj->Y+=18;    
+    if(obj->Y < (9 * MAXZLEVELS) + 10)
+      obj->Y+=9;    
   }
 
   if(ard.justPressed(A_BUTTON))
@@ -25,6 +26,7 @@ void UpdateFluffles(Object* obj, ObjectManager* handler)
   {
     
     obj->State = 0;    
+    gamestate = GameState::MainMenu;
   }
   
   if(handler->UpdateFrameCount())
@@ -34,25 +36,42 @@ void UpdateFluffles(Object* obj, ObjectManager* handler)
   }
 }
 
-void UpdateTree(Object* obj, ObjectManager* handler)
+void UpdatePuddle(Object* obj, ObjectManager* handler)
 {
-    obj->X--;
-
-    if(obj->X < 20)
+  if(obj->State == 0){
+    obj->X-=Speed;
+    if(obj->X < -20)
     {
+      uint8_t r = random(0,MAXZLEVELS);
       obj->Active = false;
-      handler->AddObject((Object){1,1,0,200,0,true});
+      //handler->AddObject((Object){1,0,0,128,(9*r)+20,10,10,true});
     }  
+
+    Object player = handler->Objects[0];
+    int16_t PuddleColideY =  obj->Y - 10;
+
+    if((player.Y == PuddleColideY)&&(obj->X < 24))
+    {
+      handler->Objects[0].State = 1;
+      for(IntType i = 0; i < MAXOBJECTS; i++)
+      {
+        if(handler->Objects[i].Active)
+          if(handler->Objects[i].Type == obj->Type)
+            handler->Objects[i].State = 1;
+      }
+      gamestate = GameState::GameOver;
+    }
+  }
 }
 
 
 using UpdateObjectFunction = void(*)(Object *, ObjectManager* );
-UpdateObjectFunction UpdateFunctionArray[MAXOBJECTTYPE] {UpdateFluffles,UpdateTree};
+UpdateObjectFunction UpdateFunctionArray[MAXOBJECTTYPE] {UpdateFluffles,UpdatePuddle};
 
-void RunFunction(uint8_t id, Object * object, ObjectManager* handler)
+void RunFunction(uint8_t type, Object * object, ObjectManager* handler)
 {
-  if(id > MAXOBJECTTYPE)
+  if(type > MAXOBJECTTYPE -1)
     return;
 
-  UpdateFunctionArray[id](object, handler);
+  UpdateFunctionArray[type](object, handler);
 }
