@@ -48,7 +48,7 @@ void UpdatePuddle(Object* obj, ObjectManager* handler)
     Object player = handler->Objects[0];
     int16_t PuddleColideY =  obj->Y - 10;
 
-    if((player.Y == PuddleColideY)&&((obj->X < 24)&&(obj->X > 5)))
+    if((player.Y == PuddleColideY)&&((obj->X < 16)&&(obj->X > 5)))
     {
       handler->Objects[0].State = 1;
       for(IntType i = 0; i < MAXOBJECTS; i++)
