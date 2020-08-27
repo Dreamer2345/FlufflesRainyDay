@@ -15,9 +15,17 @@ void DrawPuddle(Object* obj, ObjectManager* handler){
   sprite.drawExternalMask(X,Y,PuddleSprite,PuddleSpriteMask,0,0);
 }
 
+void DrawTree(Object* obj, ObjectManager* handler){
+  int16_t X = obj -> X;
+  int16_t Y = obj -> Y;
+  
+
+  sprite.drawExternalMask(X,Y,TreeSprite,TreeSpriteMask,0,0);
+}
+
 
 using DrawObjectFunction = void(*)(Object *, ObjectManager*);
-DrawObjectFunction DrawFunctionArray[MAXOBJECTTYPE] {DrawFluffles, DrawPuddle};
+DrawObjectFunction DrawFunctionArray[MAXOBJECTTYPE] {DrawFluffles, DrawPuddle, DrawTree};
 
 void DrawFunction(uint8_t type, Object * object, ObjectManager* handler)
 {

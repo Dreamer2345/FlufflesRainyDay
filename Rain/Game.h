@@ -47,15 +47,25 @@ void GameInit(){
   objmngr.Reset();
   Score = 0;
   Speed = 1;
-  objmngr.AddObject((Object){0,0,0,10,10,24,17,true});
+  objmngr.AddObject((Object){0,0,0,10,10,0,17,true});
   uint8_t r = random(0,MAXZLEVELS);
   uint8_t r1 = random(0,MAXZLEVELS);
   if(r != r1){
-    objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,24,16,true});
-    objmngr.AddObject((Object){1,0,0,128,(r1  * 9) + 20,10,10,true});
+    objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,10,true});
+    objmngr.AddObject((Object){1,0,0,128,(r1  * 9) + 20,0,10,true});
   }
   else{
-    objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,24,16,true});
+    objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,10,true});
+  }
+  
+  r = random(0,2);
+  if(r == 0)
+  {
+    objmngr.AddObject((Object){2,0,0,192,-19,0,32,true});
+  }
+  else
+  {
+    objmngr.AddObject((Object){2,0,0,192,34,0,32,true});
   }
   
   gamestate = GameState::GamePlay;
@@ -75,11 +85,11 @@ void GamePlay(){
     uint8_t r = random(0,MAXZLEVELS);
     uint8_t r1 = random(0,MAXZLEVELS);
     if(r != r1){
-      objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,24,16,true});
-      objmngr.AddObject((Object){1,0,0,128,(r1  * 9) + 20,10,10,true});
+      objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,10,true});
+      objmngr.AddObject((Object){1,0,0,128,(r1  * 9) + 20,0,10,true});
     }
     else{
-      objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,24,16,true});
+      objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,10,true});
     }
   }
 

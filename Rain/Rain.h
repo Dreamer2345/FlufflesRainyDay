@@ -35,7 +35,7 @@ void Ambiance::Init(){
   {
       particles[i].Active = true;      
       particles[i].y = random(0,64);
-      particles[i].x = random(0,130);
+      particles[i].x = random(0,140);
       particles[i].life = 0;
       particles[i].maxLife = random(3,10);
   }
