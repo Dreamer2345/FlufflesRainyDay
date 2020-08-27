@@ -1,7 +1,7 @@
 #pragma once
 #define FramesPerAnimUpdate 10
 #define MAXOBJECTS 5
-#define MAXOBJECTTYPE 2
+#define MAXOBJECTTYPE 3
 #define IntType uint16_t
 #include "Object.h"
 
@@ -35,8 +35,8 @@ void ObjectManager::Update(){
 
 void ObjectManager::Draw(){
   IntType DrawOrder[MAXOBJECTS];
-  IntType DrawVals[MAXOBJECTS];
-  for(IntType i = 0; i < MAXOBJECTS; i++){DrawOrder[i] = i; if(Objects[i].Type > 0){DrawVals[i] = Objects[i].Y + Objects[i].SizeY;}else{DrawVals[i] = -10;}}
+  int16_t DrawVals[MAXOBJECTS];
+  for(IntType i = 0; i < MAXOBJECTS; i++){DrawOrder[i] = i; if(Objects[i].Active){DrawVals[i] = Objects[i].Y + Objects[i].SizeY;}else{DrawVals[i] = -256;}}
 
   
   uint8_t A = 1;
@@ -48,7 +48,7 @@ void ObjectManager::Draw(){
       DrawOrder[B] = DrawOrder[B - 1];
       DrawOrder[B - 1] = s;
 
-      s = DrawVals[B];
+      int16_t s1 = DrawVals[B];
       DrawVals[B] = DrawVals[B - 1];
       DrawVals[B - 1] = s;
       
@@ -63,6 +63,19 @@ void ObjectManager::Draw(){
       DrawFunction(Objects[DrawOrder[i]].Type,&Objects[DrawOrder[i]],this);
     }
   }
+  /*
+  for(IntType i = 0; i < MAXOBJECTS; i++){
+    if(Objects[DrawOrder[i]].Active){
+      ard.setCursor(Objects[DrawOrder[i]].X,Objects[DrawOrder[i]].Y);
+      ard.print(i);
+      ard.print(F(":"));
+      ard.print(DrawVals[i]);
+      ard.print(F(":"));
+      ard.print(Objects[DrawOrder[i]].SizeY);
+    }
+  }
+  ard.setCursor(0,0);
+  */
 }
 
 bool ObjectManager::AddObject(Object obj){
