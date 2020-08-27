@@ -51,11 +51,11 @@ void GameInit(){
   uint8_t r = random(0,MAXZLEVELS);
   uint8_t r1 = random(0,MAXZLEVELS);
   if(r != r1){
-    objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,10,true});
-    objmngr.AddObject((Object){1,0,0,128,(r1  * 9) + 20,0,10,true});
+    objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,6,true});
+    objmngr.AddObject((Object){1,0,0,128,(r1  * 9) + 20,0,6,true});
   }
   else{
-    objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,10,true});
+    objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,6,true});
   }
   
   r = random(0,2);
@@ -85,11 +85,11 @@ void GamePlay(){
     uint8_t r = random(0,MAXZLEVELS);
     uint8_t r1 = random(0,MAXZLEVELS);
     if(r != r1){
-      objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,10,true});
-      objmngr.AddObject((Object){1,0,0,128,(r1  * 9) + 20,0,10,true});
+      objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,6,true});
+      objmngr.AddObject((Object){1,0,0,128,(r1  * 9) + 20,0,6,true});
     }
     else{
-      objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,10,true});
+      objmngr.AddObject((Object){1,0,0,128,(r * 9) + 20,0,6,true});
     }
   }
 
