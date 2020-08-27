@@ -30,6 +30,7 @@ void InitHighScore(){
 }
 
 void MainMenu(){
+  sound.noTone();
   sprite.drawSelfMasked(15,0,Title,0);
   ard.setCursor(55,42);
   ard.print((unsigned long)High);
@@ -41,6 +42,7 @@ void MainMenu(){
 
 //Type, State, Frame, X, Y, SizeX, SizeY, Active
 void GameInit(){
+  sound.tones(allNotes);
   amb.Init();
   objmngr.Reset();
   Score = 0;
